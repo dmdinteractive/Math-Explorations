@@ -19,13 +19,18 @@ grid[center, center] = 1
 def move():
     return random.choice([(-1,0),(1,0),(0,-1),(0,1)])
 
-x, y = center, center
 
-for step in range(10):
-         dx,dy = move()
-         x = x + dx
-         y = y + dy
-         print(x,y)
+for particle in range(num_particles):
+    x, y = center, center
+    for step in range(100000):
+        dx,dy = move()
+        x = x + dx
+        y = y + dy
+        print(x,y)
+        if grid[x-1,y]== 1 or grid[x+1, y] == 1 or grid[x, y-1] == 1 or grid[x, y+1] == 1:
+               grid[x,y] = 1
+               print("particle stuck at" , x, y)
+               break
 
 
 plt.imshow(grid, cmap="gray")
